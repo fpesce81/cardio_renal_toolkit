@@ -5,7 +5,10 @@ import streamlit as st
 # --- Main Application ---
 st.set_page_config(layout="wide")  # Use a wider layout for better readability
 st.title("Cardio-Renal Clinical Toolkit")
-st.write("An interactive tool for clinicians based on the AJKD Core Curriculum 2025 on Kidney Dysfunction in Heart Failure.")
+
+st.markdown(
+    'This is an interactive application based on the manuscript: [*Kidney Dysfunction in Heart Failure: Core Curriculum 2025*](https://www.ajkd.org/article/S0272-6386(25)00691-2/fulltext)')
+
 st.divider()
 
 # --- MODULE 1: INTERACTIVE DECONGESTION ALGORITHM ---
@@ -88,8 +91,10 @@ st.divider()
 st.header("Module 3: Interactive Case Studies")
 st.markdown(
     "Test your knowledge with these interactive cases from the manuscript.")
-case1, case2, case3, case4, case5, case7, case8, case9 = st.tabs(
-    ["Case 1 (Q1)", "Case 2 (Q2)", "Case 2 Cont. (Q3)", "Case 4 (Q4)", "Case 5 (Q5)", "Case 6 (Q7)", "Case 7 (Q8)", "Case 8 (Q9)"])
+
+# Create clean, consecutively numbered tabs
+case1, case2, case3, case4, case5, case6, case7 = st.tabs(
+    ["Case 1", "Case 2", "Case 3", "Case 4", "Case 5", "Case 6", "Case 7"])
 
 with case1:
     st.subheader("Case 1 Presentation")
@@ -110,6 +115,7 @@ with case1:
         st.markdown("**Explanation:** In this patient with acute HF, the blood pressure is high with evidence of preserved perfusion... Increased right-sided venous filling pressure (and, by extension, kidney venous pressure) is a major determinant of worsening kidney function in HF across the ejection fraction spectrum.")
 
 with case2:
+    # This tab now contains BOTH questions related to Case 2
     st.subheader("Case 2 Presentation")
     st.markdown("A 56-year-old man with HFrEF (EF 30%), and hypertension is hospitalized with acute HF. Home furosemide is 40 mg/d orally... Exam shows JVD, lung crackles... creatinine 1.3 mg/dL (baseline, 0.9 mg/dL).")
     st.subheader(
@@ -127,7 +133,8 @@ with case2:
                 f"Your answer: {answer_q2}. The correct answer is (e) Furosemide 100 mg intravenously.")
         st.markdown("**Explanation:** Most HF guidelines recommend starting IV loop diuretic therapy with at least twice the daily home dose. The DOSE trial supports a high-dose strategy (2.5x home oral dose). The intravenous route is preferred in acute HF due to unpredictable gut absorption.")
 
-with case3:
+    st.divider()  # Separator between the two questions
+
     st.subheader("Case 2, Continued...")
     st.subheader(
         "Question 3: What is the best way to accurately assess diuretic response during decongestion for hospitalized HF?")
@@ -144,13 +151,13 @@ with case3:
                 f"Your answer: {answer_q3}. The correct answer is (b) Urine sodium concentration measured 2 hours after diuretic administration.")
         st.markdown("**Explanation:** Daily weights and 24-hour urine output are affected by many factors and are slow to reveal trends. A spot urine sodium measurement 2 hours after a diuretic dose is a reliable and rapid way of predicting the subsequent natriuresis. A spot urine sodium concentration <50-70 mEq/L at 2 hours denotes an insufficient response and allows for rapid uptitration of therapy.")
 
-with case4:
-    st.subheader("Case 4 Presentation")
+with case3:
+    st.subheader("Case 3 Presentation (from manuscript's Case 4)")
     st.markdown("A 53-year-old woman with HFpEF (EF 55%), diabetes, HTN, and CKD stage G4 is hospitalized. She receives IV furosemide 200 mg twice daily, but her net intake/output is +300 mL and weight is unchanged.")
     st.subheader("Question 4: What is the next best step for this patient?")
     options_q4 = ["(a) Increase furosemide to 400 mg intravenously twice daily", "(b) Change diuretic agent to bumetanide 4 mg intravenously twice daily",
                   "(c) Add metolazone 5 mg/d", "(d) Discontinue lisinopril treatment", "(e) Initiate ultrafiltration"]
-    answer_q4 = st.radio("Select your answer for Question 4:",
+    answer_q4 = st.radio("Select your answer for this question:",
                          options_q4, index=None, key='q4')
     if answer_q4:
         st.subheader("Answer and Explanation")
@@ -161,13 +168,13 @@ with case4:
                 f"Your answer: {answer_q4}. The correct answer is (c) Add metolazone 5 mg/d.")
         st.markdown("**Explanation:** This patient has diuretic resistance. The best approach is sequential nephron blockade, using diuretic agents acting on different nephron segments. Adding a thiazide-type diuretic like metolazone to a loop diuretic is a classic and effective strategy to augment the overall diuretic response, as demonstrated in trials like CLOROTIC.")
 
-with case5:
-    st.subheader("Case 5 Presentation")
+with case4:
+    st.subheader("Case 4 Presentation (from manuscript's Case 5)")
     st.markdown("A 60-year-old man with HFrEF (EF, 25%), CKD, is hospitalized. He is on high dose diuretics plus chlorothiazide. Urine output is poor, creatinine is rising (2.4 to 3.2 mg/dL), BP is 90/60 mm Hg, and lactate is 4 mmol/L.")
     st.subheader("Question 5: What is the next best step for this patient?")
     options_q5 = ["(a) Change to furosemide continuous infusion and add acetazolamide", "(b) Change furosemide to bumetanide infusion",
                   "(c) Add metolazone 30 minutes before furosemide", "(d) Arrange for right heart catheterization", "(e) Initiate ultrafiltration"]
-    answer_q5 = st.radio("Select your answer for Question 5:",
+    answer_q5 = st.radio("Select your answer for this question:",
                          options_q5, index=None, key='q5')
     if answer_q5:
         st.subheader("Answer and Explanation")
@@ -178,14 +185,14 @@ with case5:
                 f"Your answer: {answer_q5}. The correct answer is (d) Arrange for right heart catheterization.")
         st.markdown("**Explanation:** Worsening kidney function despite appropriate decongestion efforts, inadequate diuretic response, and especially concern for low cardiac output (signaled by hypotension and elevated lactate) should prompt early consideration for right heart catheterization to obtain invasive hemodynamic measurements and guide therapy, such as inotropes.")
 
-with case7:
-    st.subheader("Case 6 Presentation")
+with case5:
+    st.subheader("Case 5 Presentation (from manuscript's Case 6)")
     st.markdown("A 63-year-old woman with HFrEF (EF, 30%) and CKD (stage G3a A1) is stable after hospitalization. Her only GDMT is carvedilol.")
     st.subheader(
         "Question 7: What additional classes of agents constitute GDMT for this individual?")
     options_q7 = ["(a) Angiotensin receptor/neprilysin (ARN) inhibitors, sodium/glucose cotransporter 2 (SGLT2) inhibitors",
                   "(b) ARN inhibitors, SGLT2 inhibitors, mineralocorticoid receptor antagonists (MRAS)", "(c) ARN inhibitors, MRAS"]
-    answer_q7 = st.radio("Select your answer for Question 7:",
+    answer_q7 = st.radio("Select your answer for this question:",
                          options_q7, index=None, key='q7')
     if answer_q7:
         st.subheader("Answer and Explanation")
@@ -196,13 +203,13 @@ with case7:
                 f"Your answer: {answer_q7}. The correct answer is (b) ARN inhibitors, SGLT2 inhibitors, mineralocorticoid receptor antagonists (MRAS).")
         st.markdown("**Explanation:** GDMT for HFrEF involves the four 'pillars' of therapy. This patient is on a beta-blocker, so she should also be started on an ARNI (or ACEi/ARB), an MRA, and an SGLT2 inhibitor to achieve maximal mortality and morbidity benefit.")
 
-with case8:
-    st.subheader("Case 7 Presentation")
+with case6:
+    st.subheader("Case 6 Presentation (from manuscript's Case 7)")
     st.markdown("A 65-year-old man with HFrEF (EF, 35%), and CKD (stage G3a) is seen in clinic. He is euvolemic. His K+ is 5.3 mEq/L, and his lisinopril was recently stopped.")
     st.subheader("Question 8: What is the next best step for this patient?")
     options_q8 = ["(a) Start spironolactone", "(b) Increase the furosemide dose", "(c) Add an SGLT2 inhibitor together with lisinopril",
                   "(d) Maintain deescalation of lisinopril", "(e) Add metolazone 3 times per week"]
-    answer_q8 = st.radio("Select your answer for Question 8:",
+    answer_q8 = st.radio("Select your answer for this question:",
                          options_q8, index=None, key='q8')
     if answer_q8:
         st.subheader("Answer and Explanation")
@@ -213,13 +220,13 @@ with case8:
                 f"Your answer: {answer_q8}. The correct answer is (c) Add an SGLT2 inhibitor together with lisinopril.")
         st.markdown("**Explanation:** Hyperkalemia is a common barrier to GDMT. SGLT2 inhibitors have been shown to reduce the risk of serious hyperkalemia, even in patients taking RAAS inhibitors and MRAs. Adding an SGLT2 inhibitor creates an opportunity to safely reintroduce or maintain the lisinopril, thus optimizing GDMT.")
 
-with case9:
-    st.subheader("Case 8 Presentation")
+with case7:
+    st.subheader("Case 7 Presentation (from manuscript's Case 8)")
     st.markdown("A 45-year-old woman with a new diagnosis of HFrEF (EF, 35%) was started on lisinopril and empagliflozin two weeks ago. Her creatinine has increased from 1.2 mg/dL to 1.5 mg/dL.")
     st.subheader("Question 9: What is the next best step for this patient?")
     options_q9 = ["(a) Continue lisinopril and empagliflozin", "(b) Stop lisinopril",
                   "(c) Switch lisinopril to valsartan", "(d) Stop empagliflozin"]
-    answer_q9 = st.radio("Select your answer for Question 9:",
+    answer_q9 = st.radio("Select your answer for this question:",
                          options_q9, index=None, key='q9')
     if answer_q9:
         st.subheader("Answer and Explanation")
