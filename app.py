@@ -66,3 +66,81 @@ elif response1 == 'No, response is inadequate':
 
 # --- Add a separator for the next module ---
 st.divider()
+# app.py (add this code to the end of the file)
+
+# --- MODULE 2: GDMT NAVIGATOR ---
+st.header("Module 2: Guideline-Directed Medical Therapy (GDMT) Navigator")
+st.markdown("This tool shows the level of evidence for HFrEF therapies based on the patient's CKD stage, as summarized in Figure 6 of the manuscript.")
+
+# The data from Figure 6 is stored in a Python dictionary
+gdmt_data = {
+    "CKD 1 and 2": {
+        "Beta Blocker": "Strong",
+        "MRA": "Strong",
+        "Non-steroidal MRA": "Strong",
+        "ARNI": "Strong",
+        "ACEi/ARB": "Strong",
+        "Diuretics": "Absent",
+        "SGLT2i": "Strong",
+    },
+    "CKD 3": {
+        "Beta Blocker": "Strong",
+        "MRA": "Strong",
+        "Non-steroidal MRA": "Strong",
+        "ARNI": "Strong",
+        "ACEi/ARB": "Strong",
+        "Diuretics": "Absent",
+        "SGLT2i": "Strong",
+    },
+    "CKD 4": {
+        "Beta Blocker": "Limited",
+        "MRA": "Limited",
+        "Non-steroidal MRA": "Strong (up to eGFR> 25 cc/min)",
+        "ARNI": "Limited",
+        "ACEi/ARB": "Limited",
+        "Diuretics": "Absent",
+        "SGLT2i": "Strong (eGFR> 20 cc/min)",
+    },
+    "CKD 5": {
+        "Beta Blocker": "Absent",
+        "MRA": "Absent",
+        "Non-steroidal MRA": "Absent",
+        "ARNI": "Absent",
+        "ACEi/ARB": "Absent",
+        "Diuretics": "Absent",
+        "SGLT2i": "Limited",
+    }
+}
+
+# Create a dropdown menu (selectbox) for the user to choose the CKD stage
+ckd_stage = st.selectbox(
+    "Select the patient's CKD Stage:",
+    options=list(gdmt_data.keys()),
+    index=None,
+    placeholder="Choose a CKD Stage..."
+)
+
+# Display the recommendations if a stage is selected
+if ckd_stage:
+    st.subheader(f"Recommendations for {ckd_stage}")
+
+    # Get the specific data for the selected stage
+    recommendations = gdmt_data[ckd_stage]
+
+    # Display each therapy and its evidence level
+    for therapy, evidence in recommendations.items():
+        if evidence == "Strong":
+            st.markdown(
+                f"- **{therapy}:** <span style='color:green;'>**{evidence}**</span>", unsafe_allow_html=True)
+        elif evidence == "Limited":
+            st.markdown(
+                f"- **{therapy}:** <span style='color:orange;'>**{evidence}**</span>", unsafe_allow_html=True)
+        elif "Strong (up to" in evidence or "Strong (eGFR>" in evidence:
+            st.markdown(
+                f"- **{therapy}:** <span style='color:green;'>**{evidence}**</span>", unsafe_allow_html=True)
+        else:  # Absent
+            st.markdown(
+                f"- **{therapy}:** <span style='color:red;'>**{evidence}**</span>", unsafe_allow_html=True)
+
+# --- Add another separator for the next module ---
+st.divider()
